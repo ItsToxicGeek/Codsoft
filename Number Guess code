@@ -1,0 +1,55 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class project1 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        int maxAttempts = 15;
+        int roundsWon = 0;
+        boolean playAgain = true;
+
+        while (playAgain) {
+            int numberToGuess = random.nextInt(100) + 1;  // Generates a number between 1 and 100
+            int attempts = 0;
+            boolean correctGuess = false;
+
+            System.out.println("Welcome to the Number Guessing Game!");
+            System.out.println("I have generated a number between 1 and 100. You have " + maxAttempts + " attempts to guess it.");
+
+            // Loop for the guessing attempts
+            while (attempts < maxAttempts) {
+                System.out.print("Enter your guess: ");
+                int playerGuess = scanner.nextInt();
+                attempts++;
+
+                if (playerGuess == numberToGuess) {
+                    System.out.println("Congratulations! You've guessed the correct number.");
+                    correctGuess = true;
+                    roundsWon++;
+                    break;
+                } else if (playerGuess > numberToGuess) {
+                    System.out.println("Too high!");
+                } else {
+                    System.out.println("Too low!");
+                }
+
+                System.out.println("Attempts left: " + (maxAttempts - attempts));
+            }
+
+            if (!correctGuess) {
+                System.out.println("Sorry, you've used all your attempts. The correct number was " + numberToGuess);
+            }
+
+            System.out.print("Would you like to play another round? (yes/no): ");
+            String response = scanner.next();
+            playAgain = response.equalsIgnoreCase("yes");
+
+            System.out.println("Rounds won: " + roundsWon);
+        }
+
+        System.out.println("Thanks for playing! You won " + roundsWon + " rounds.");
+        scanner.close();
+    }
+}
